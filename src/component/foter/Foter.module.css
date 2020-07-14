@@ -1,0 +1,62 @@
+.parent {
+  background-color: rgb(49, 47, 47);
+  padding-bottom: 30px;
+}
+.content {
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  width: 70%;
+}
+.contentone {
+  padding: 10px;
+  line-height: 17px;
+  size: 12px;
+}
+.contenttwo {
+  padding: 10px;
+  line-height: 17px;
+  size: 12px;
+}
+.contentthree {
+  padding: 10px;
+  line-height: 17px;
+  size: 12px;
+}
+.parent h2 {
+  color: blanchedalmond;
+  margin-bottom: 2px;
+}
+.parent p {
+  color: blanchedalmond;
+}
+.parent hr {
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 70%;
+  color: blanchedalmond;
+}
+.contact {
+  padding-top: 30px;
+  display: flex;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 70%;
+}
+.contact img {
+  left: 0;
+  width: 100px;
+  height: 60px;
+}
+.xx {
+  margin-left: auto;
+  display: flex;
+}
+.xx p {
+  margin-right: 10px;
+  color: honeydew;
+  right: 0;
+}

@@ -1,0 +1,27 @@
+.parent {
+  background-color: hotpink;
+  text-align: center;
+}
+.view {
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+}
+.left {
+  left: 0;
+  background-color: red;
+  width: 150px;
+}
+.middle {
+  left: 0;
+  right: 0;
+  margin: auto;
+  background-color: yellow;
+  width: 600px;
+}
+.right {
+  right: 0;
+  background-color: blue;
+  width: 150px;
+}

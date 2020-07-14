@@ -1,0 +1,13 @@
+.nav_parent {
+  background-color: greenyellow;
+  display: flex;
+}
+.nav {
+  display: flex;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.nav h5 {
+  margin-left: 20px;
+}
