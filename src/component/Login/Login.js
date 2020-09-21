@@ -24,24 +24,13 @@ class Login extends React.Component {
         console.log("error login func", error);
         this.setState({ error: error.message });
       });
+
     console.log("login func called");
-  };
-  signup = (e) => {
-    e.preventDefault();
-    auth
-      .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then((u) => {})
-      .catch((error) => {
-        console.log("error signup func", error);
-        this.setState({ error: error.message });
-      });
-    console.log("signup func call");
   };
 
   render() {
     return (
       <div class={style.parent}>
-        <h1>this is home </h1>
         <form onSubmit={this.login}>
           <input
             type="email"
@@ -58,11 +47,15 @@ class Login extends React.Component {
             }}
           />
           <button onClick={this.login}>login</button>
-          <button onClick={this.signup}>signup</button>
+          <a href="/signup">
+            <h1>signup</h1>
+          </a>
         </form>
+
         <p>{this.state.error}</p>
       </div>
     );
   }
 }
+
 export default Login;

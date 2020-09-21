@@ -1,18 +1,19 @@
 import React from "react";
 import style from "./nav.module.css";
-import { auth } from "../Fire";
+import { auth, database } from "../Fire";
 export default function Nav() {
-  // signout = () => {
-  //   console.log("sinout");
-  //   // auth.signOut();
-  // };
+  const signout = () => {
+    database.collection("profilemid").doc("one").delete();
+    console.log("sinout");
+    auth.signOut();
+  };
   return (
     <div class={style.nav_parent}>
       <div class={style.nav}>
         {/* <img src="https://miro.medium.com/max/260/1*r323AdQdzU5JTWhZsSyxCA.png" /> */}
-        <a href="/xy">
+        <a href="/P2pchat">
           {" "}
-          <h5>TECH</h5>{" "}
+          <h5>p2pchat</h5>{" "}
         </a>
         <h5>Home</h5>
 
@@ -28,7 +29,7 @@ export default function Nav() {
         <h5>ALL</h5>
         <button
           onClick={() => {
-            auth.signOut();
+            signout();
           }}
         >
           signout

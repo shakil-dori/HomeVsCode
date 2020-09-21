@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Chat.module.css";
-import { database, timeStamp, storage } from "../Fire";
+import { database, timeStamp, storage, auth } from "../Fire";
 
 class Chat extends React.Component {
   constructor(props) {
@@ -11,9 +11,43 @@ class Chat extends React.Component {
       imageUrl: "",
       data: [],
       isLoading: true,
+      nameofuser: "",
     };
   }
   componentDidMount() {
+    //setting name using database :P
+    database
+      .collection("profilemid")
+      .doc("one")
+      .get()
+      .then((snap) => {
+        console.log("snap check", snap.data());
+        if (!snap.data()) {
+          return;
+        } else if (snap.data()) {
+          this.setState({ nameofuser: snap.data().name });
+          console.log("profilemid check name", snap.data().name);
+
+          database.collection("profile").doc(auth.currentUser.uid).set({
+            name: snap.data().name,
+            userUid: auth.currentUser.uid,
+            timeStamp: timeStamp,
+          });
+          return;
+        }
+      });
+    database
+      .collection("profile")
+      .doc(auth.currentUser.uid)
+      .get()
+      .then((snap) => {
+        if (!snap.data()) {
+          return;
+        } else {
+          this.setState({ nameofuser: snap.data().name });
+        }
+      });
+
     database
       .collection("chat")
       .orderBy("timeStamp", "desc")
@@ -28,9 +62,10 @@ class Chat extends React.Component {
                 title: item.data().title,
                 id: item.id,
                 img: item.data().imageUrl,
+                name: item.data().name,
               },
             ],
-            isLoading: false,
+            // isLoading: false,
           });
         });
       });
@@ -78,6 +113,7 @@ class Chat extends React.Component {
     }
     const dataId = database.collection("chat").doc();
     dataId.set({
+      name: this.state.nameofuser,
       title: this.state.inputval,
       timeStamp: timeStamp,
     });
@@ -103,7 +139,7 @@ class Chat extends React.Component {
   render() {
     return (
       <div class={style.parent}>
-        <p>this is chat</p>
+        <p>this is chat= {this.state.nameofuser}</p>
         <form onSubmit={this.addData}>
           <input
             placeholder="text"
@@ -128,14 +164,16 @@ class Chat extends React.Component {
           <p>this is email</p>
         </div>
         <hr />
-
-        {this.state.data.map((item) => (
-          <div>
-            <p> {item.title}</p>
-            <Deletey item={item} />
-            <img src={item.img} />
-          </div>
-        ))}
+        <div class={style.viewmsg}>
+          {this.state.data.map((item) => (
+            <div>
+              <p>name={item.name}</p>
+              <p> text={item.title}</p>
+              <Deletey item={item} />
+              <img src={item.img} />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
